@@ -8,12 +8,17 @@ public class TravelDeal {
     private String price;
     private String imageUrl;
 
-    public TravelDeal(String title, String description, String price, String imageUrl) {
-        this.setId(id);
+    public TravelDeal(){};
+
+    public TravelDeal(String imageUrl, String price, String title, String description) {
+        //this.setId(id);
+
+        this.setImageUrl(imageUrl);
+        this.setPrice(price);
         this.setTitle(title);
         this.setDescription(description);
-        this.setPrice(price);
-        this.setImageUrl(imageUrl);
+
+
     }
 
     public String getId() {
