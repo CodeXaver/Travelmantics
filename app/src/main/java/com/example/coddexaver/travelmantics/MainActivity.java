@@ -34,9 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         RecyclerView rvDeals = findViewById(R.id.rvDeals);
-        final DealAdapter adapter = new DealAdapter();
-        rvDeals.setAdapter(adapter);
         LinearLayoutManager dealsLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rvDeals.setLayoutManager(dealsLayoutManager);
+        final DealAdapter adapter = new DealAdapter();
+        rvDeals.setAdapter(adapter);
+
  }
 }

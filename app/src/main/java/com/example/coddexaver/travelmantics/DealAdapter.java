@@ -25,12 +25,12 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildListener;
 
-    public DealAdapter(){
+    public DealAdapter() {
         FirebaseUtil.openFbReference("traveldeals");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
-       //Retrieve deals from FirebaseUtil class
+        //Retrieve deals from FirebaseUtil class
         deals = FirebaseUtil.mDeals;
 
         //set up child event listener to listen to database data changes to be used to update UI
@@ -39,18 +39,18 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
                 Log.d("Deal: ", td.getTitle());
-          td.setId(dataSnapshot.getKey());
-           deals.add(td);
-           notifyItemInserted(deals.size()-1);
+                td.setId(dataSnapshot.getKey());
+                deals.add(td);
+                notifyItemInserted(deals.size() - 1);
             }
 
             @Override
-            public void onChildChanged( DataSnapshot dataSnapshot, String s) {
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onChildRemoved( DataSnapshot dataSnapshot) {
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
 
             }
 
@@ -60,7 +60,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             }
 
             @Override
-            public void onCancelled( DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         };
@@ -80,8 +80,8 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DealAdapter.DealViewHolder holder, int position) {
-TravelDeal deal = deals.get(position);
-holder.bind(deal);
+        TravelDeal deal = deals.get(position);
+        holder.bind(deal);
     }
 
     @Override
@@ -90,15 +90,16 @@ holder.bind(deal);
     }
 
     //View Holder subclass of the DealAdapter class
-    public class DealViewHolder extends RecyclerView.ViewHolder{
-      TextView tvTitle;
-      public DealViewHolder(View itemView){
-          super(itemView);
-          tvTitle = itemView.findViewById(R.id.tvTitle);
-      }
+    public class DealViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle;
 
-      public void bind(TravelDeal deal){
-          tvTitle.setText(deal.getTitle());
-      }
+        public DealViewHolder(View itemView) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+        }
+
+        public void bind(TravelDeal deal) {
+            tvTitle.setText(deal.getTitle());
+        }
     }
 }
