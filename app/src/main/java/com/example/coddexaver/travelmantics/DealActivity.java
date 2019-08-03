@@ -1,5 +1,6 @@
 package com.example.coddexaver.travelmantics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,14 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class InsertActivity extends AppCompatActivity {
+public class DealActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     EditText txtTitle;
     EditText txtDescription;
     EditText txtPrice;
-
+    TravelDeal deal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,20 @@ public class InsertActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         txtDescription = findViewById(R.id.txtDescription);
         txtPrice = findViewById(R.id.txtPrice);
-    }
 
+
+        //get Intent from the Viewholder of the DealAdapter (Serializable from TravelDeal Class)
+        Intent intent = getIntent();
+        TravelDeal deal = (TravelDeal) intent.getSerializableExtra("Deal");
+        // Check for presence of a deal
+        if (deal == null) {
+            deal = new TravelDeal();
+        }
+        this.deal = deal;
+        txtTitle.setText(deal.getTitle());
+        txtDescription.setText(deal.getDescription());
+        txtPrice.setText(deal.getPrice());
+    }
     //Set item selection functionality on the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -56,7 +69,7 @@ public class InsertActivity extends AppCompatActivity {
         String description = txtDescription.getText().toString();
         String price = txtPrice.getText().toString();
 
-        TravelDeal deal = new TravelDeal(title, description, price, "");
+        TravelDeal deal = new TravelDeal("", price, title, description);
         mDatabaseReference.push().setValue(deal);
     }
 

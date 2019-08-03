@@ -1,6 +1,7 @@
 package com.example.coddexaver.travelmantics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,16 +91,36 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     }
 
     //View Holder subclass of the DealAdapter class
-    public class DealViewHolder extends RecyclerView.ViewHolder {
+    public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvTitle;
+        TextView tvDescription;
+        TextView tvPrice;
+
 
         public DealViewHolder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(TravelDeal deal) {
             tvTitle.setText(deal.getTitle());
+            tvDescription.setText(deal.getDescription());
+            tvPrice.setText(deal.getPrice());
+
+        }
+
+
+        @Override
+        public void onClick(View v) {
+           int position = getAdapterPosition();
+           TravelDeal selectedDeal = deals.get(position);
+            Intent intent = new Intent(itemView.getContext(), DealActivity.class);
+            intent.putExtra("Deal", selectedDeal);
+            itemView.getContext().startActivity(intent);
+
         }
     }
 }
