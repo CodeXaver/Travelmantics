@@ -114,10 +114,10 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
 
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
            int position = getAdapterPosition();
            TravelDeal selectedDeal = deals.get(position);
-            Intent intent = new Intent(itemView.getContext(), DealActivity.class);
+            Intent intent = new Intent(view.getContext(), DealActivity.class);
             intent.putExtra("Deal", selectedDeal);
             itemView.getContext().startActivity(intent);
 

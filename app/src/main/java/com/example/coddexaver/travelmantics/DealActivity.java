@@ -1,5 +1,6 @@
 package com.example.coddexaver.travelmantics;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -53,8 +54,13 @@ public class DealActivity extends AppCompatActivity {
             case R.id.save_menu:
                 saveDeal();
                 Toast.makeText(this, "Deal saved", Toast.LENGTH_LONG).show();
-                clean();
+                backToList();
                 return true;
+            case R.id.delete_menu:
+                deleteDeal();
+                Toast.makeText(this, "Deal deleted", Toast.LENGTH_LONG).show();
+                backToList();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -65,13 +71,30 @@ public class DealActivity extends AppCompatActivity {
 
 //save the deal here
     private void saveDeal() {
-        String title = txtTitle.getText().toString();
-        String description = txtDescription.getText().toString();
-        String price = txtPrice.getText().toString();
+        deal.setTitle(txtTitle.getText().toString());
+      deal.setDescription(txtDescription.getText().toString());
+      deal.setPrice(txtPrice.getText().toString());
 
-        TravelDeal deal = new TravelDeal("", price, title, description);
-        mDatabaseReference.push().setValue(deal);
+      //check if deal is new or existing one before saving or uptading
+        if(deal.getId()==null){mDatabaseReference.push().setValue(deal);}
+else  {
+    mDatabaseReference.child(deal.getId()).setValue(deal);
+        }
     }
+
+    //delete a deal
+    private void deleteDeal(){
+        if(deal == null){
+            Toast.makeText(this, "Please save the deal before deleting", Toast.LENGTH_SHORT).show();;
+            return;
+        }
+        mDatabaseReference.child(deal.getId()).removeValue();
+    }
+
+    private void backToList(){
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
 
     //
     private void clean() {
@@ -89,4 +112,6 @@ public class DealActivity extends AppCompatActivity {
         inflater.inflate(R.menu.save_menu, menu);
         return true;
     }
+
+
 }
