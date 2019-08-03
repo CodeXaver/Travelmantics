@@ -1,5 +1,6 @@
 package com.example.coddexaver.travelmantics;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -25,13 +26,17 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildListener;
+private static Activity caller;
+
 
     public DealAdapter() {
-        FirebaseUtil.openFbReference("traveldeals");
+        FirebaseUtil.openFbReference("traveldeals", caller  );
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
+        this.caller = caller;
 
         //Retrieve deals from FirebaseUtil class
+
         deals = FirebaseUtil.mDeals;
 
         //set up child event listener to listen to database data changes to be used to update UI

@@ -7,4 +7,6 @@
     <string name="deal_descriptiion">Deal Descriptiion</string>
     <string name="deal_price">Deal price</string>
     <string name="delete_deal">delete deal</string>
+    <string name="new_travel_deal">New Travel Deal</string>
+    <string name="logout">Logout</string>
 </resources>
