@@ -26,7 +26,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildListener;
-private static Activity caller;
+private static MainActivity caller;
 
 
     public DealAdapter() {
@@ -44,7 +44,6 @@ private static Activity caller;
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
-                Log.d("Deal: ", td.getTitle());
                 td.setId(dataSnapshot.getKey());
                 deals.add(td);
                 notifyItemInserted(deals.size() - 1);
