@@ -14,10 +14,11 @@
         android:layout_marginTop="@dimen/text_margin_standard"
         android:layout_marginEnd="@dimen/text_margin_standard"
         android:inputType="text"
-        android:hint="Deal title"
+        android:hint="@string/deal_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/txtDescription"
@@ -30,7 +31,8 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+        android:autofillHints="" tools:targetApi="o"/>
 
     <EditText
         android:id="@+id/txtPrice"
@@ -43,5 +45,32 @@
         android:hint="@string/deal_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription"
+        android:importantForAutofill="no" tools:targetApi="o"/>
+
+    <Button
+        android:id="@+id/btnImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin_standard"
+        android:layout_marginTop="@dimen/text_margin_standard"
+        android:layout_marginEnd="@dimen/text_margin_standard"
+        android:text="@string/upload_image"
+        android:shadowColor="@color/fui_bgTwitter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin_standard"
+        android:layout_marginTop="@dimen/text_margin_standard"
+        android:layout_marginEnd="@dimen/text_margin_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnImage"
+        app:srcCompat="@android:drawable/screen_background_light_transparent"
+        android:contentDescription="@string/todo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
